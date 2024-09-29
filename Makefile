@@ -93,7 +93,7 @@ $(NAME): $(OBJS)
 
 $(MACOS): $(OBJS)
 	@echo "\n$(YELLOW)Linking objects...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) -Lmlx_macos -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -Lmlx_macos -lmlx -framework OpenGL -framework AppKit -o $(MACOS)
 	@echo "$(BLUE)Progress: 100%$(RESET)"
 	@echo "$(GREEN)Compilation complete!$(RESET)\n"
 	@echo "$(COL1) ██████╗██╗   ██╗██████╗ ██████╗ ██████╗ "
@@ -109,7 +109,7 @@ clean:
 
 fclean: clean
 	@make -s clean -C mlx_macos
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(MACOS)
 	@echo "$(RED)Removed executable.$(RESET)"
 
 re: fclean all
