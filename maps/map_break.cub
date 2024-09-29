@@ -1,0 +1,20 @@
+F 0,0,0
+NO ./textures/wood_vertical.xpm
+SO ./textures/brick_wall_cracked.xpm
+C 255,255,255
+                     WE ./textures/us.xpm
+EA ./textures/brick_wall.xpm
+
+
+1111                          1   1111
+1001                              1ED1
+1101                              1111                          111
+ 111                                                            101
+1111111111111111111111111111111111111111111111111111111111111111111111
+11111111 11111111111111111111
+1
+1                                                 111
+1                                                1101
+                                                  111
+
+

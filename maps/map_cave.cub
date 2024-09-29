@@ -1,0 +1,18 @@
+NO ./textures/wood_vertical.xpm
+SO ./textures/brick_wall_cracked.xpm
+WE ./textures/rocky.xpm
+EA ./textures/brick_wall.xpm
+
+F 30,30,30
+C 50,50,50
+
+        11111111111
+      11100000000111
+     11100011D100001
+     100001100100001
+   111D1111000100001
+  110000111111100001
+  100000D00000000011
+  100E0011111111101
+  10000000000000D01
+  11111111111111111
