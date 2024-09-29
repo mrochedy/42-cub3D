@@ -38,6 +38,7 @@
 
 # Debug files
 *.dSYM/
+*.dSYM
 *.su
 *.idb
 *.pdb
@@ -50,3 +51,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+objs/
+.DS_Store
+.vscode
