@@ -81,8 +81,7 @@ $(MLX_MACOS):
 
 $(NAME): $(OBJS)
 	@echo "\n$(YELLOW)Linking objects...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) -L$(MLX_PATH) -lmlx_Linux -L/usr/lib -I$(MLX_PATH) -lXext -lX11 -lm -lz -o $(NAME)
-	@echo "$(BLUE)Progress: 100%$(RESET)"
+	@$(CC) $(CFLAGS) $(OBJS) -Lmlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
 	@echo "$(GREEN)Compilation complete!$(RESET)\n"
 	@echo "$(COL1) ██████╗██╗   ██╗██████╗ ██████╗ ██████╗ "
 	@echo "$(COL2)██╔════╝██║   ██║██╔══██╗╚════██╗██╔══██╗"
@@ -104,11 +103,12 @@ $(MACOS): $(OBJS)
 	@echo "$(COL6) ╚═════╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚═════╝ $(RESET)\n"
 
 clean:
+	@make -s clean -C mlx_linux
+	@make -s clean -C mlx_macos
 	@rm -rf $(OBJS_DIR)
 	@echo "$(RED)Cleaned object files.$(RESET)"
 
 fclean: clean
-	@make -s clean -C mlx_macos
 	@rm -f $(NAME) $(MACOS)
 	@echo "$(RED)Removed executable.$(RESET)"
 
