@@ -16,6 +16,10 @@ Please note that while this code is provided for **learning purposes**, you shou
 
 ## Getting Started
 
+This project is compatible on Linux and macOS.
+
+> If you are on macOS, make sure you have installed Xcode Command Line Tools.
+
 To try the game, start by cloning the repository as follows:
 
 ```bash
@@ -23,18 +27,12 @@ git clone https://github.com/mrochedy/42-cub3D.git
 cd 42-cub3D
 ```
 
-To ensure **cross-compatibility** for both Linux and macOS, different commands are required depending on your platform:
+Then build and launch the game:
 
-- **Linux**:
-  ```bash
-  make
-  ./cub3D [map_file.cub]
-  ```
-- **macOS**:
-  ```bash
-  make macos
-  ./cub3D_macos [map_file.cub]
-  ```
+```bash
+make
+./cub3D [map_file.cub]
+```
 
 The map file should be in the `.cub` format, as specified by the **cub3D** requirements. A `maps` folder is provided at the root of the repository, containing a variety of maps for testing and exploration.
 

@@ -1,5 +1,4 @@
 NAME = cub3D
-MACOS = cub3D_macos
 
 MLX_LINUX = mlx_linux/libmlx.a
 MLX_MACOS = mlx_macos/libmlx.a
@@ -7,6 +6,21 @@ MLX_MACOS = mlx_macos/libmlx.a
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
+
+INCLUDES = -Iincludes
+
+UNAME_S = $(shell uname -s)
+ifeq ($(UNAME_S), Linux)
+    INCLUDES += -Imlx_linux -Iincludes/linux_include
+    LDFLAGS = -Lmlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz
+    MLX = $(MLX_LINUX)
+else ifeq ($(UNAME_S), Darwin)
+    INCLUDES += -Imlx_macos -Iincludes/macos_include
+    LDFLAGS = -Lmlx_macos -lmlx -framework OpenGL -framework AppKit
+    MLX = $(MLX_MACOS)
+else
+    $(error Operating system not supported)
+endif
 
 SRCS_DIR = srcs
 UTILS_DIR = utils
@@ -59,13 +73,7 @@ COL4 = \033[38;2;255;234;115m # Pastel orange-yellow
 COL5 = \033[38;2;255;244;102m # Light pastel yellow
 COL6 = \033[38;2;255;255;153m # Pastel yellow
 
-INCLUDES = -Iincludes
-
-all: INCLUDES += -Imlx_linux -Iincludes/linux_include
-macos: INCLUDES += -Imlx_macos -Iincludes/macos_include
-
-all: $(MLX_LINUX) $(NAME)
-macos: $(MLX_MACOS) $(MACOS)
+all: $(MLX) $(NAME)
 
 $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -81,19 +89,7 @@ $(MLX_MACOS):
 
 $(NAME): $(OBJS)
 	@echo "\n$(YELLOW)Linking objects...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) -Lmlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
-	@echo "$(GREEN)Compilation complete!$(RESET)\n"
-	@echo "$(COL1) ██████╗██╗   ██╗██████╗ ██████╗ ██████╗ "
-	@echo "$(COL2)██╔════╝██║   ██║██╔══██╗╚════██╗██╔══██╗"
-	@echo "$(COL3)██║     ██║   ██║██████╔╝ █████╔╝██║  ██║"
-	@echo "$(COL4)██║     ██║   ██║██╔══██╗ ╚═══██╗██║  ██║"
-	@echo "$(COL5)╚██████╗╚██████╔╝██████╔╝██████╔╝██████╔╝"
-	@echo "$(COL6) ╚═════╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚═════╝ $(RESET)\n"
-
-$(MACOS): $(OBJS)
-	@echo "\n$(YELLOW)Linking objects...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) -Lmlx_macos -lmlx -framework OpenGL -framework AppKit -o $(MACOS)
-	@echo "$(BLUE)Progress: 100%$(RESET)"
+	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)Compilation complete!$(RESET)\n"
 	@echo "$(COL1) ██████╗██╗   ██╗██████╗ ██████╗ ██████╗ "
 	@echo "$(COL2)██╔════╝██║   ██║██╔══██╗╚════██╗██╔══██╗"
@@ -105,15 +101,14 @@ $(MACOS): $(OBJS)
 clean:
 	@make -s clean -C mlx_linux
 	@make -s clean -C mlx_macos
+	@echo "$(RED)Cleaned the MLX library.$(RESET)"
 	@rm -rf $(OBJS_DIR)
 	@echo "$(RED)Cleaned object files.$(RESET)"
 
 fclean: clean
-	@rm -f $(NAME) $(MACOS)
+	@rm -f $(NAME)
 	@echo "$(RED)Removed executable.$(RESET)"
 
 re: fclean all
 
-re_macos: fclean macos
-
-.PHONY: all clean fclean re macos re_macos
+.PHONY: all clean fclean re
