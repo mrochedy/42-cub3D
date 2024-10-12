@@ -4,6 +4,8 @@ Welcome to our repository for **cub3D**, a 3D game engine project we developed a
 
 This version of **cub3D** is **cross-compatible** between **Linux** and **macOS**, allowing it to run smoothly on both platforms. In this repository, you'll find everything you need to compile and play the game on either system. Even though it was carefully crafted and was evaluated by three different students, errors may still exist. Your feedback is highly appreciated!
 
+<img width="198" alt="125/100 grade" src="https://github.com/user-attachments/assets/708486c1-c045-40d6-ab0c-e5dc3650a50d">
+
 ## About the Project
 
 **Cub3D** is an advanced project in the 42 curriculum that introduces students to fundamental 3D rendering techniques using **raycasting**. Inspired by early FPS games like **Wolfenstein 3D**, the game aims to immerse the player in a maze-like environment, where they must navigate and interact with the surroundings.
